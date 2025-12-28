@@ -26,3 +26,5 @@ replay_pid*
 # ignore IDE files
 /out
 /.idea
+/idea
+.idea
