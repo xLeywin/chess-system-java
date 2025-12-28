@@ -24,6 +24,6 @@ hs_err_pid*
 replay_pid*
 
 # ignore IDE files
-/out
-/.idea
 .idea/
+out/
+*.iml
