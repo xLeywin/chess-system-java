@@ -2,6 +2,7 @@ package application;
 
 import chess.*;
 
+import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -32,32 +33,37 @@ public class UI {
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
     public static ChessPosition readChessPosition(Scanner sc) {
-        try{
+        try {
             String s = sc.nextLine();
             char column = s.charAt(0);
             int row = Integer.parseInt(s.substring(1));
             return new ChessPosition(column, row);
-        }
-        catch(RuntimeException e){
+        } catch (RuntimeException e) {
             throw new InputMismatchException("Error reading ChessPosition. Valid values are form a1 to h8.");
         }
     }
 
     public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
-        printBoard(chessMatch.getPieces());;
+        printBoard(chessMatch.getPieces());
+        ;
         printCapturedPieces(captured);
         System.out.println("Turn: " + chessMatch.getTurn());
-        System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+        if (!chessMatch.getCheckMate()) {
+            System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
 
-        if(chessMatch.getCheck()){
-            System.out.println("CHECK!");
+            if (chessMatch.getCheck()) {
+                System.out.println("CHECK!");
+            }
+        } else {
+            System.out.println("CHECKMATE!");
+            System.out.println("Winner: " + chessMatch.getCurrentPlayer());
         }
     }
 
     public static void printBoard(ChessPiece[][] pieces) {
-        for(int i = 0; i < pieces.length; i++) {
+        for (int i = 0; i < pieces.length; i++) {
             System.out.print((8 - i) + " ");
-            for(int j = 0; j < pieces.length; j++) {
+            for (int j = 0; j < pieces.length; j++) {
                 printPiece(pieces[i][j], false);
             }
             System.out.println();
@@ -67,9 +73,9 @@ public class UI {
 
     public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
 
-        for(int i = 0; i < pieces.length; i++) {
+        for (int i = 0; i < pieces.length; i++) {
             System.out.print((8 - i) + " ");
-            for(int j = 0; j < pieces.length; j++) {
+            for (int j = 0; j < pieces.length; j++) {
                 printPiece(pieces[i][j], possibleMoves[i][j]);
             }
             System.out.println();
@@ -78,15 +84,15 @@ public class UI {
     }
 
     private static void printPiece(ChessPiece piece, boolean background) {
-        if(background){
+        if (background) {
             System.out.print(ANSI_BLUE_BACKGROUND);
         }
         if (piece == null) {
-           System.out.print("-" + ANSI_RESET);
-        }else {
+            System.out.print("-" + ANSI_RESET);
+        } else {
             if (piece.getColor() == Color.WHITE) {
                 System.out.print(ANSI_WHITE + piece + ANSI_RESET);
-            }else {
+            } else {
                 System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
             }
         }
