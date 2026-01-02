@@ -23,6 +23,9 @@ Peças:
 - K (King) -> Rei
 - P (Pawn) -> Peão
 
+Como jogar:
+- Utilize cordenadas (Ex: a5, b6, h8) para selecionar uma peça e depois movê-la.
+
 ## Ferramentas
 - IntelliJ IDEA
 - Terminal / Git Bash
