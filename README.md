@@ -15,6 +15,14 @@ O objetivo principal é consolidar conceitos como encapsulamento, herança, poli
   
 ![Imagem](https://github.com/xLeywin/Assets/blob/main/chess-system-java/image.png)
 
+Peças:
+- R (Rook) -> Torre
+- N (Knight) -> Cavalo 
+- B (Bishop) -> Bispo
+- Q (Queen) -> Rainha
+- K (King) -> Rei
+- P (Pawn) -> Peão
+
 ## Ferramentas
 - IntelliJ IDEA
 - Terminal / Git Bash
